@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ournyc.R;
+import com.example.ournyc.callback.ProgramDiffCallback;
 import com.example.ournyc.model.ProgramModel;
 import com.example.ournyc.view.ProgramViewHolder;
 
@@ -39,4 +40,10 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramViewHolder> {
         return apiServiceList.size();
     }
 
+    public void updateList(List<ProgramModel> apiService) {
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new ProgramDiffCallback(apiServiceList, apiService));
+        apiServiceList.clear();
+        apiServiceList.addAll(apiService);
+        diffResult.dispatchUpdatesTo(this);
+    }
 }
