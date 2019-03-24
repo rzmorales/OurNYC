@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 apiServiceList -> {
-                                    Log.d("find me", "find me" + apiServiceList);
+                                    Log.d(TAG, "find me" + apiServiceList);
 
                                     sortByDate(apiServiceList);
 
@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
                                     apiServiceList.addAll(serviceMap.values());
                                     services.addAll(apiServiceList);
 
-                                    Log.d("find me", "find me" + apiServiceList.get(0).getProgram_name() + apiServiceList.get(0).getDate());
-                                    Log.d("find me", "find me" + apiServiceList.get(10).getProgram_name() + apiServiceList.get(10).getDate());
+                                    Log.d(TAG, "find me" + apiServiceList.get(0).getProgram_name() + apiServiceList.get(0).getDate());
+                                    Log.d(TAG, "find me" + apiServiceList.get(10).getProgram_name() + apiServiceList.get(10).getDate());
 
 
                                     adapter = new ProgramAdapter(apiServiceList);
@@ -73,6 +73,12 @@ public class MainActivity extends AppCompatActivity {
                                 throwable -> Log.d("find me", "" + throwable)
 
                         ));
+
+        (findViewById(R.id.button)).setOnClickListener(v -> {
+            services.remove(1);
+            adapter.updateList(services);
+        });
+
 
     }
 
@@ -88,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            return secondDate.compareTo(firstDate);
+
+            return secondDate != null ? secondDate.compareTo(firstDate) : 0;
         });
     }
 
