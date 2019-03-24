@@ -5,14 +5,18 @@ This project is intended for New Yorkers who aren't quite sure what resources ar
 
 This Android application highlights the upcoming events/resources that any New York resident has access to.
 
-<h1>Libraries Used:</h1>
-- RxJava
-- Retrofit
-- Picasso
+<h2>Libraries Used:</h2>
+<ul>
+<li>RxJava</li>
+<li>Retrofit</li>
+<li>Picasso</li>
+</ul>
 
-<h1>Contact</h1>
-Robert Zarate-Morales
+<h2>Contact</h2>
+<h3>Robert Zarate-Morales</h3>
+<div/>
 <a href="www.linkedin.com/in/robert-zarate-morales">LinkedIn Profile</a>
 
-
+<p>
 Keep in touch with my progress through my Trello Board <a href="https://trello.com/invite/b/mvXzukq9/2680d42524b51953957121f3b6592402/robert-solo-project">here</a>.
+</p>
