@@ -13,9 +13,8 @@ This Android application highlights the upcoming events/resources that any New Y
 </ul>
 
 <h2>Contact</h2>
-<h3>Robert Zarate-Morales</h3>
-<div/>
-<a href="www.linkedin.com/in/robert-zarate-morales">LinkedIn Profile</a>
+<h3>
+<a href="www.linkedin.com/in/robert-zarate-morales">Robert Zarate-Morales</a></h3>
 
 <p>
 Keep in touch with my progress through my Trello Board <a href="https://trello.com/invite/b/mvXzukq9/2680d42524b51953957121f3b6592402/robert-solo-project">here</a>.
