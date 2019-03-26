@@ -1,4 +1,4 @@
-package com.example.ournyc.controller;
+package com.example.ournyc.presentation.controller;
 
 
 import android.support.annotation.NonNull;
@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 
 import com.example.ournyc.R;
 import com.example.ournyc.callback.ProgramDiffCallback;
-import com.example.ournyc.model.ProgramModel;
-import com.example.ournyc.view.ProgramViewHolder;
+import com.example.ournyc.data.model.ProgramModel;
+import com.example.ournyc.presentation.view.ProgramViewHolder;
 
 import java.util.List;
 

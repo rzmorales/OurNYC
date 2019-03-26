@@ -1,4 +1,4 @@
-package com.example.ournyc.network;
+package com.example.ournyc.data.network;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;

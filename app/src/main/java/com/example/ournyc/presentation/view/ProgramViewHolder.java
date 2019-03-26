@@ -1,4 +1,4 @@
-package com.example.ournyc.view;
+package com.example.ournyc.presentation.view;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.ournyc.R;
-import com.example.ournyc.model.ProgramModel;
+import com.example.ournyc.data.model.ProgramModel;
 
 public class ProgramViewHolder extends RecyclerView.ViewHolder {
     public ProgramViewHolder(@NonNull View itemView) {

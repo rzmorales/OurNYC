@@ -3,7 +3,7 @@ package com.example.ournyc.callback;
 import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
 
-import com.example.ournyc.model.ProgramModel;
+import com.example.ournyc.data.model.ProgramModel;
 
 import java.util.List;
 

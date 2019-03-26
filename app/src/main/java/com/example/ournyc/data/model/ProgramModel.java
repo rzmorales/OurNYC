@@ -1,4 +1,4 @@
-package com.example.ournyc.model;
+package com.example.ournyc.data.model;
 
 public class ProgramModel implements Comparable<ProgramModel> {
     String program_name;

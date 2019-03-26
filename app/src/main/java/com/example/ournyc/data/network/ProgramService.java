@@ -1,6 +1,6 @@
-package com.example.ournyc.network;
+package com.example.ournyc.data.network;
 
-import com.example.ournyc.model.ProgramModel;
+import com.example.ournyc.data.model.ProgramModel;
 
 import java.util.List;
 
