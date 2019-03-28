@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ournyc.R;
+import com.example.ournyc.SendToFragment;
 import com.example.ournyc.callback.ProgramDiffCallback;
 import com.example.ournyc.data.model.ProgramModel;
 import com.example.ournyc.presentation.view.ProgramViewHolder;
@@ -18,16 +19,18 @@ import java.util.List;
 public class ProgramAdapter extends RecyclerView.Adapter<ProgramViewHolder> {
 
     List<ProgramModel> apiServiceList;
+    SendToFragment sendToFragment;
 
-    public ProgramAdapter(List<ProgramModel> apiServiceList) {
+    public ProgramAdapter(List<ProgramModel> apiServiceList, SendToFragment sendToFragment) {
         this.apiServiceList = apiServiceList;
+        this.sendToFragment = sendToFragment;
     }
 
     @NonNull
     @Override
     public ProgramViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View childView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_view, viewGroup, false);
-        return new ProgramViewHolder(childView);
+        return new ProgramViewHolder(childView, sendToFragment);
     }
 
     @Override

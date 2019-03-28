@@ -7,8 +7,13 @@ public class ProgramModel implements Comparable<ProgramModel> {
     String age_group;
     String program_description;
     String date;
+    String get_help_in_person;
 
-    public String getDate() {
+    public String getProgram_help_in_person() {
+        return get_help_in_person;
+    }
+
+    public String getProgram_date() {
         return date;
     }
 
