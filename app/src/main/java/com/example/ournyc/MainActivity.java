@@ -6,12 +6,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.example.ournyc.presentation.controller.ProgramAdapter;
-import com.example.ournyc.domain.ProgramRepository;
-import com.example.ournyc.domain.ProgramUseCaseImpl;
 import com.example.ournyc.data.model.ProgramModel;
 import com.example.ournyc.data.network.ProgramRepositoryImpl;
 import com.example.ournyc.data.network.RetrofitSingleton;
+import com.example.ournyc.domain.ProgramRepository;
+import com.example.ournyc.domain.ProgramUseCaseImpl;
+import com.example.ournyc.fragment.ContactInfoFragment;
+import com.example.ournyc.presentation.controller.ProgramAdapter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,12 +27,15 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SendToFragment {
 
     public static final String TAG = "FINDME";
     List<ProgramModel> services = new ArrayList<>();
     ProgramAdapter adapter;
-    private ProgramUsecase programUsecase;
+    ProgramUsecase programUsecase;
+    public static final String NAME = "name";
+    public static final String DATE = "date";
+    SendToFragment sendToFragment;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 
@@ -40,14 +44,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         final RecyclerView recyclerView = findViewById(R.id.RecyclerViewID);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this.getApplicationContext()));
 
+
+        sendToFragment = (SendToFragment) this;
         final Retrofit retrofit = RetrofitSingleton.getInstance();
         final ProgramRepository programRepository = new ProgramRepositoryImpl(retrofit);
 
         programUsecase = new ProgramUseCaseImpl(programRepository);
-
 
 
         compositeDisposable.add(
@@ -62,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
                                     sortByDate(apiServiceList);
 
                                     Map<String, ProgramModel> serviceMap = new HashMap<>();
-                                    for (ProgramModel a : apiServiceList) {
-                                        if (!serviceMap.containsKey(a.getProgram_name())) {
-                                            serviceMap.put(a.getProgram_name(), a);
+                                    for (ProgramModel programModel : apiServiceList) {
+                                        if (!serviceMap.containsKey(programModel.getProgram_name())) {
+                                            serviceMap.put(programModel.getProgram_name(), programModel);
                                         }
                                     }
 
@@ -72,16 +78,16 @@ public class MainActivity extends AppCompatActivity {
                                     apiServiceList.addAll(serviceMap.values());
                                     services.addAll(apiServiceList);
 
-                                    Log.d(TAG, "find me" + apiServiceList.get(0).getProgram_name() + apiServiceList.get(0).getDate());
-                                    Log.d(TAG, "find me" + apiServiceList.get(10).getProgram_name() + apiServiceList.get(10).getDate());
+                                    Log.d(TAG, "find me" + apiServiceList.get(0).getProgram_name() + apiServiceList.get(0).getProgram_date());
+                                    Log.d(TAG, "find me" + apiServiceList.get(10).getProgram_name() + apiServiceList.get(10).getProgram_date());
 
 
-                                    adapter = new ProgramAdapter(apiServiceList);
+                                    adapter = new ProgramAdapter(apiServiceList, sendToFragment);
                                     recyclerView.setAdapter(adapter);
 
                                 },
 
-                                throwable -> Log.d("find me", "" + throwable)
+                                throwable -> Log.d(TAG, "" + throwable)
 
                         ));
 
@@ -99,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
             Date firstDate = null;
             Date secondDate = null;
             try {
-                firstDate = simpleDateFormat.parse(o1.getDate());
-                secondDate = simpleDateFormat.parse(o2.getDate());
+                firstDate = simpleDateFormat.parse(o1.getProgram_date());
+                secondDate = simpleDateFormat.parse(o2.getProgram_date());
 
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -117,4 +123,11 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
 
     }
+
+    @Override
+    public void sendToFragment(String name, String help_inPerson) {
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, ContactInfoFragment.newInstance(name, help_inPerson)).addToBackStack(null).commit();
+    }
+
 }
