@@ -6,6 +6,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface ProgramService {
     String ENDPOINT = "resource/2j8u-wtju.json";

@@ -125,9 +125,11 @@ public class MainActivity extends AppCompatActivity implements SendToFragment {
     }
 
     @Override
-    public void sendToFragment(String name, String help_inPerson) {
+    public void sendToFragment(String name, ArrayList<String> programDetailsList) {
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, ContactInfoFragment.newInstance(name, help_inPerson)).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, ContactInfoFragment.newInstance(name, programDetailsList))
+                .addToBackStack(null).commit();
     }
 
 }
