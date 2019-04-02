@@ -16,6 +16,72 @@ public class ProgramModel implements Comparable<ProgramModel> {
     String heads_up;
     String how_to_apply_summary;
     String how_to_apply_or_enroll_online;
+    String required_documents_summary;
+    String url_of_online_application;
+    String get_help_by_calling_311_please_provide_what_to_ask_for_when_calling_311;
+    String get_help_by_calling_other_than_311;
+    String language;
+    String program_acronym_if_any;
+    String plain_language_program_name;
+    String brief_excerpt;
+    String apply_online_call_to_action;
+    String url_of_pdf_application_forms;
+    String how_to_apply_or_enroll_in_person;
+    String office_locations_url;
+
+    public String getRequired_documents_summary() {
+        return required_documents_summary;
+    }
+
+    public String getUrl_of_online_application() {
+        return url_of_online_application;
+    }
+
+    public String getGet_help_by_calling_311_please_provide_what_to_ask_for_when_calling_311() {
+        return get_help_by_calling_311_please_provide_what_to_ask_for_when_calling_311;
+    }
+
+    public String getGet_help_by_calling_other_than_311() {
+        return get_help_by_calling_other_than_311;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public String getProgram_acronym_if_any() {
+        return program_acronym_if_any;
+    }
+
+    public String getPlain_language_program_name() {
+        return plain_language_program_name;
+    }
+
+    public String getBrief_excerpt() {
+        return brief_excerpt;
+    }
+
+    public String getApply_online_call_to_action() {
+        return apply_online_call_to_action;
+    }
+
+    public String getUrl_of_pdf_application_forms() {
+        return url_of_pdf_application_forms;
+    }
+
+    public String getHow_to_apply_or_enroll_in_person() {
+        return how_to_apply_or_enroll_in_person;
+    }
+
+    public String getOffice_locations_url() {
+        return office_locations_url;
+    }
+
+    public String getHow_to_apply_or_enroll_by_phone() {
+        return how_to_apply_or_enroll_by_phone;
+    }
+
+    String how_to_apply_or_enroll_by_phone;
 
 
     public String getGet_help_in_person() {
@@ -53,7 +119,6 @@ public class ProgramModel implements Comparable<ProgramModel> {
     public String getHow_to_apply_or_enroll_online() {
         return how_to_apply_or_enroll_online;
     }
-
 
     public String getProgram_help_in_person() {
         return get_help_in_person;

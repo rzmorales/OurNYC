@@ -13,12 +13,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.ournyc.R;
-import com.jakewharton.rxbinding3.view.RxView;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.safety.Whitelist;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +29,8 @@ public class ContactInfoFragment extends Fragment {
     private List<String> programDetailList;
 
 
-    public ContactInfoFragment() {}
+    public ContactInfoFragment() {
+    }
 
     public static ContactInfoFragment newInstance(String programTitle, ArrayList<String> programDetailArrayList) {
         ContactInfoFragment fragment = new ContactInfoFragment();
@@ -42,6 +39,10 @@ public class ContactInfoFragment extends Fragment {
         args.putStringArrayList(ARG_PARAM2, programDetailArrayList);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    private static boolean onTouch(View v, MotionEvent event) {
+        return true;
     }
 
     @Override
@@ -54,49 +55,91 @@ public class ContactInfoFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_contact_info, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.setOnTouchListener((v, event) -> true);
+        view.setOnTouchListener(ContactInfoFragment::onTouch);
+
+        //Set Program Name
+        TextView program_name = view.findViewById(R.id.Program_name);
+        program_name.setText(mParam1);
+
+
+        //Set Program Date
+        TextView program_date = view.findViewById(R.id.Program_date);
+        String program_date_text = programDetailList.get(0);
+        program_date.setText(program_date_text);
+
+
+        //Set Program Description
+        String program_description = Jsoup.parse(programDetailList.get(1)).text().toString();
+        String parsed_program_description = assertProgramText(program_description);
+        TextView program_description_view = view.findViewById(R.id.Program_description);
+        program_description_view.setText(parsed_program_description);
 
 
 
-        String description = Jsoup.parse(programDetailList.get(2)).text().toString();
-        ((TextView) view.findViewById(R.id.Program_name)).setText(mParam1);
+
+        //Set How to apply
+        TextView how_to_apply_view = view.findViewById(R.id.how_to_apply_text);
+        String how_to_apply = programDetailList.get(2);
+        String parsed_how_to_apply = getHrefTagValue(assertProgramText(how_to_apply));
+        if (parsed_how_to_apply==null){
+            how_to_apply_view.setVisibility(View.GONE);
+            parsed_how_to_apply = "help?";
+        }
+        how_to_apply_view.setText(parsed_how_to_apply);
+
+        if (parsed_how_to_apply==null){
+            how_to_apply_view.setVisibility(View.GONE);
+        }
+
+        //Set Get Help
+        TextView get_help_view = view.findViewById(R.id.Get_help_text);
+        String get_help = programDetailList.get(3);
+        String parsed_get_help = getHrefTagValue(assertProgramText(get_help));
+        get_help_view.setText(parsed_get_help);
 
 
-        ((TextView) view.findViewById(R.id.Program_date)).setText(description);
-        ((TextView) view.findViewById(R.id.Program_category)).setText(Jsoup.parse(programDetailList.get(3)).text());
         Log.d("findme", "html: " + programDetailList.get(4));
 
-        Document doc = Jsoup.parse(programDetailList.get(4));
-        Element link = doc.select("a").first();
 
-        String linkHref = link.attr("href");
-        Log.d("findme", "href: " + linkHref);
+//        Log.d("findme", "href: " + getHrefTagValue(assertProgramText(programDetailList.get(4))));
 
 
-
-        String how_to_apply_or_enroll_online = programDetailList.get(4);
-        if (how_to_apply_or_enroll_online == null){
-            how_to_apply_or_enroll_online= "THIS IS A TEST";
-        }
-
-        ((TextView) view.findViewById(R.id.Program_description)).setText(Jsoup.parse(how_to_apply_or_enroll_online).text());
-
-        String how_to_getEmail = programDetailList.get(6);
-        if (how_to_getEmail == null){
-            how_to_getEmail= "THIS IS A TEST";
-        }
-        Log.d(TAG, "onViewCreated: " + Jsoup.parse(programDetailList.get(3)).attr("abs:href").toString());
-
-        ((TextView) view.findViewById(R.id.Program_sample)).setText(Jsoup.parse(how_to_getEmail).text());
+        assertProgramText(programDetailList.get(4));
 
 
+//        ((TextView) view.findViewById(R.id.Program_description)).setText(Jsoup.parse(how_to_apply_or_enroll_online).text());
+//
+//        String how_to_getEmail = programDetailList.get(3);
+//        if (how_to_getEmail == null) {
+//            how_to_getEmail = "THIS IS A TEST";
+//        }
+////        Log.d(TAG, "onViewCreated: " + getHrefTagValue(assertProgramText(programDetailList.get(3))));
+//
+//
+//        ((TextView) view.findViewById(R.id.Get_help_text)).setText(Jsoup.parse(how_to_getEmail).text());
     }
+
+
+    public static String assertProgramText(String input) {
+        if (input == null) {
+            input = "This is a test";
+        }
+        return input;
+    }
+
+
+    public static String getHrefTagValue(String html) {
+        if (html == null){
+            return "apple";
+        }
+        return Jsoup.parse(html).select("a").first().attr("href");
+    }
+
 }
