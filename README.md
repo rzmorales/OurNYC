@@ -9,7 +9,7 @@ This Android application highlights the upcoming events/resources that any New Y
 <ul>
 <li>RxJava</li>
 <li>Retrofit</li>
-<li>Picasso</li>
+<li>Jsoup</li>
 </ul>
 
 <h2>Contact</h2>
