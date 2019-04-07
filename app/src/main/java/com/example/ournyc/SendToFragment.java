@@ -10,5 +10,7 @@ import java.util.List;
 
 public interface SendToFragment {
 
-    void sendToFragment(String name, ArrayList<String> programDetailsList);
+    void sendToContactInfoFragment(String name, ArrayList<String> programDetailsList);
+    void sendToRecyclerViewFragment();
+
 }

@@ -1,10 +1,15 @@
 package com.example.ournyc.fragment;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -18,6 +23,7 @@ import org.jsoup.Jsoup;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class ContactInfoFragment extends Fragment {
@@ -87,43 +93,36 @@ public class ContactInfoFragment extends Fragment {
         //Set How to apply
         TextView how_to_apply_view = view.findViewById(R.id.how_to_apply_text);
         String how_to_apply = programDetailList.get(2);
-        String parsed_how_to_apply = getHrefTagValue(assertProgramText(how_to_apply));
-        if (parsed_how_to_apply==null){
-            how_to_apply_view.setVisibility(View.GONE);
-            parsed_how_to_apply = "help?";
-        }
-        how_to_apply_view.setText(parsed_how_to_apply);
+        Spanned spannedString = fromHtml(how_to_apply);
+        Log.d("findme", "html: " + how_to_apply);
+        how_to_apply_view.setText(spannedString);
 
-        if (parsed_how_to_apply==null){
-            how_to_apply_view.setVisibility(View.GONE);
-        }
+        how_to_apply_view.setMovementMethod(LinkMovementMethod.getInstance());
+
+
+//        String parsed_how_to_apply = assertProgramText(how_to_apply);
+//        System.out.println(parseHTML( parsed_how_to_apply));
+//        if (parsed_how_to_apply==null){
+//            how_to_apply_view.setVisibility(View.GONE);
+//            parsed_how_to_apply = "help?";
+//            view.findViewById(R.id.How_to_apply_title).setVisibility(View.GONE);
+//            view.findViewById(R.id.black_line2).setVisibility(View.GONE);
+//            how_to_apply_view.setVisibility(View.GONE);
+//        } else {}
 
         //Set Get Help
         TextView get_help_view = view.findViewById(R.id.Get_help_text);
         String get_help = programDetailList.get(3);
-        String parsed_get_help = getHrefTagValue(assertProgramText(get_help));
-        get_help_view.setText(parsed_get_help);
+
+        get_help_view.setText(fromHtml(get_help));
+        get_help_view.setMovementMethod(LinkMovementMethod.getInstance());
 
 
-        Log.d("findme", "html: " + programDetailList.get(4));
 
 
-//        Log.d("findme", "href: " + getHrefTagValue(assertProgramText(programDetailList.get(4))));
 
 
-        assertProgramText(programDetailList.get(4));
 
-
-//        ((TextView) view.findViewById(R.id.Program_description)).setText(Jsoup.parse(how_to_apply_or_enroll_online).text());
-//
-//        String how_to_getEmail = programDetailList.get(3);
-//        if (how_to_getEmail == null) {
-//            how_to_getEmail = "THIS IS A TEST";
-//        }
-////        Log.d(TAG, "onViewCreated: " + getHrefTagValue(assertProgramText(programDetailList.get(3))));
-//
-//
-//        ((TextView) view.findViewById(R.id.Get_help_text)).setText(Jsoup.parse(how_to_getEmail).text());
     }
 
 
@@ -134,12 +133,36 @@ public class ContactInfoFragment extends Fragment {
         return input;
     }
 
+    public static String parseHTML(String html){
+        return Jsoup.parse(html).body().text();
+    }
+
 
     public static String getHrefTagValue(String html) {
         if (html == null){
             return "apple";
         }
-        return Jsoup.parse(html).select("a").first().attr("href");
+
+        for (int i = 0; i < html.length()-1; i++) {
+            if (html.charAt(i) == '<' && html.charAt(i+1)=='a'){
+                return Jsoup.parse(html).select("a").first().attr("href");
+
+            }
+        }
+
+        return "";
+    }
+
+    @SuppressWarnings("deprecation")
+    public static Spanned fromHtml(String html){
+        if(html == null){
+            return new SpannableString("");
+        }else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+
+            return Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            return Html.fromHtml(html);
+        }
     }
 
 }

@@ -44,9 +44,15 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramViewHolder> {
     }
 
     public void updateList(List<ProgramModel> apiService) {
-        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new ProgramDiffCallback(apiServiceList, apiService));
-        apiServiceList.clear();
-        apiServiceList.addAll(apiService);
-        diffResult.dispatchUpdatesTo(this);
+//        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new ProgramDiffCallback(apiServiceList, apiService));
+//        apiServiceList.clear();
+//        apiServiceList.addAll(apiService);
+//        diffResult.dispatchUpdatesTo(this);
+//
+//        notifyDataSetChanged();
+
+        this.apiServiceList = apiService;
+        notifyDataSetChanged();
+
     }
 }
