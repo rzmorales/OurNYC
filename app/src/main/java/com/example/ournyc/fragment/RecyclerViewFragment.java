@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.ournyc.MainActivity;
 import com.example.ournyc.ProgramUsecase;
 import com.example.ournyc.R;
 import com.example.ournyc.SendToFragment;
@@ -125,8 +126,10 @@ public class RecyclerViewFragment extends Fragment implements SearchView.OnQuery
                                 apiServiceList -> {
                                     Log.d(TAG, "find me" + apiServiceList);
 
-                                    sortByDate(apiServiceList);
 
+                                    ((MainActivity) getActivity()).sortByDate(apiServiceList);
+
+                                    sortByDate(apiServiceList);
                                     Map<String, ProgramModel> serviceMap = new HashMap<>();
                                     for (ProgramModel programModel : apiServiceList) {
                                         if (!serviceMap.containsKey(programModel.getProgram_name())) {

@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical"
+    android:layout_marginLeft="16dp"
     android:layout_marginTop="32dp"
     android:layout_marginRight="16dp"
-    android:layout_marginLeft="16dp"
+
+    android:background="#000000"
+    android:orientation="vertical"
+
     tools:context=".fragment.ContactInfoFragment">
 
     <TextView
@@ -16,17 +18,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="#FFFFFF"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date Posted: "
+        android:textColor="#FFFFFF"
+
+        app:layout_constraintBaseline_toBaselineOf="@+id/Program_date"
+        app:layout_constraintRight_toLeftOf="@id/Program_date"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/Program_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:textColor="#FFFFFF"
+
         app:layout_constraintHorizontal_bias="0.961"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -38,6 +53,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
+        android:textColor="#FFFFFF"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -46,8 +63,7 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/Summary_title"
@@ -55,16 +71,18 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="Program Description"
+                android:textColor="#FFFFFF"
+
                 android:textSize="30sp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/black_line"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#000000"
+                android:background="#FFFFFF"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/Summary_title" />
@@ -73,6 +91,9 @@
                 android:id="@+id/Program_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/black_line" />
@@ -83,6 +104,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="How to Apply"
+                android:textColor="#FFFFFF"
+
                 android:textSize="30sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -92,7 +115,7 @@
                 android:id="@+id/black_line2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#000000"
+                android:background="#FFFFFF"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/How_to_apply_title" />
@@ -102,6 +125,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autoLink="all"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/black_line2" />
@@ -112,6 +138,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="Get Help"
+                android:textColor="#FFFFFF"
+
                 android:textSize="30sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -121,7 +149,8 @@
                 android:id="@+id/black_line3"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#000000"
+
+                android:background="#FFFFFF"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/Get_help_title" />
@@ -131,6 +160,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autoLink="all"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/black_line3" />

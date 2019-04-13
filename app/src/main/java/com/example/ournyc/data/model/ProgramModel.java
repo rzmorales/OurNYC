@@ -144,6 +144,14 @@ public class ProgramModel implements Comparable<ProgramModel> {
         return age_group;
     }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setProgram_name(String program_name) {
+        this.program_name = program_name;
+    }
+
     public String getProgram_description() {
         return program_description;
     }
